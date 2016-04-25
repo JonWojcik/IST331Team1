@@ -26,13 +26,13 @@ namespace XboxController
     {
 
         DispatcherTimer _timer = new DispatcherTimer();
-        Skeleton[] skeletonData;
         KinectSensor _sensor;
+        static Gestures _gesture = new Gestures();
 
         public MainWindow()
         {
             InitializeComponent();
-            _timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(1) };
+            _timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(0.5) };
             _timer.Tick += _timer_Tick;
             _timer.Start();
         }
@@ -73,16 +73,13 @@ namespace XboxController
                             Console.WriteLine(jointCollection[JointType.HandRight].TrackingState.ToString()); //Debugging 
                             Canvas.SetLeft(ellipiseHandRight, jointCollection[JointType.HandRight].Position.X * 200); //Debugging 
                             Canvas.SetTop(ellipiseHandRight, jointCollection[JointType.HandRight].Position.Y * -200); //Debugging 
-
+                            _gesture.handsAboveHead(user);
                         }
                     }
                 }
             }
         } //Closing Sensor_SkeletonFrameReady method
-        void Gesture_GestureRecognized(object sender, EventArgs e)
-        {
-            var textBoxNew = new TextBox(); textBoxNew.Text = "You just waved!"; masterGrid.Children.Add(textBoxNew); Console.WriteLine("You just waved!");
-        }
+
 
         //Xbox controller stuff
 
@@ -95,7 +92,8 @@ namespace XboxController
         {
             initalizeController();
             var GPstate = GamePad.GetState(PlayerIndex.One);
-
+            if (GPstate.IsButtonDown(Buttons.RightTrigger))
+                triggerPull();
 
         }
 
@@ -104,6 +102,11 @@ namespace XboxController
             Brush defaultColor = new SolidColorBrush(Colors.LightGray);
 
             GamePad.SetVibration(PlayerIndex.One, 0, 0);
+        }
+
+        void triggerPull()
+        {
+            MessageBox.Show("trigger");
         }
 
     }
