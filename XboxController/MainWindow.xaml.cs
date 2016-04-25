@@ -16,6 +16,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System.Windows.Threading;
 using Microsoft.Kinect;
+using System.IO;
+using System.Windows.Media.Media3D;
 
 namespace XboxController
 {
@@ -40,15 +42,25 @@ namespace XboxController
         {
              _sensor = KinectSensor.KinectSensors.Where(
                 s => s.Status == KinectStatus.Connected).FirstOrDefault();
-            if (_sensor != null)
-            {
-                _sensor.ColorStream.Enable();
-                _sensor.DepthStream.Enable();
-                _sensor.SkeletonStream.Enable();
-                _sensor.DepthStream.Range = DepthRange.Near;
-                _sensor.AllFramesReady += _sensor_AllFramesReady; 
-                _sensor.Start();
-            }
+             foreach (KinectSensor sensor in KinectSensor.KinectSensors)
+             {
+                 if (_sensor != null)
+                 {
+                     _sensor.ColorStream.Enable();
+                     _sensor.DepthStream.Enable();
+                     _sensor.SkeletonStream.Enable();
+                     _sensor.DepthStream.Range = DepthRange.Near;
+                     _sensor.AllFramesReady += _sensor_AllFramesReady;
+                     try
+                     {
+                         this._sensor.Start();
+                     }
+                     catch (InvalidOperationException)
+                     {
+                         this._sensor = null;
+                     }
+                 }
+             }
         }
 
         //Skeleton Tracking
@@ -73,6 +85,7 @@ namespace XboxController
                             Console.WriteLine(jointCollection[JointType.HandRight].TrackingState.ToString()); //Debugging 
                             Canvas.SetLeft(ellipiseHandRight, jointCollection[JointType.HandRight].Position.X * 200); //Debugging 
                             Canvas.SetTop(ellipiseHandRight, jointCollection[JointType.HandRight].Position.Y * -200); //Debugging 
+                            camMain.Position = new Point3D(jointCollection[JointType.Head].Position.X, jointCollection[JointType.Head].Position.Y, 2);
                             _gesture.handsAboveHead(user);
                         }
                     }
@@ -107,6 +120,11 @@ namespace XboxController
         void triggerPull()
         {
             MessageBox.Show("trigger");
+        }
+
+        public void pauseMenuVisibility(object sender, EventArgs e)
+        {
+            PauseMenu.Visibility = Visibility.Visible;
         }
 
     }

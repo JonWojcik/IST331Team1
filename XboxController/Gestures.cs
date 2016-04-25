@@ -23,6 +23,8 @@ namespace XboxController
     {
                 readonly int WINDOW_SIZE = 50; //Number of frames for that gesture to last
                 int _frameCount = 0; //number of frames we ask for data is called window size
+                MainWindow w = new MainWindow();
+
 
         public void handsAboveHead(Skeleton skeleton)
         {
@@ -33,6 +35,10 @@ namespace XboxController
                     MessageBox.Show("Pause");
                 }
             }
+        }
+        public void Reset()
+        {
+            _frameCount = 0;
         }
     }
 }
