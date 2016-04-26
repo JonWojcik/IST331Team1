@@ -25,14 +25,14 @@ namespace XboxController
                 int _frameCount = 0; //number of frames we ask for data is called window size
                 MainWindow w = new MainWindow();
 
-
+        //Gesture for pausing game if hands are above head
         public void handsAboveHead(Skeleton skeleton)
         {
             if (skeleton.Joints[JointType.HandRight].Position.Y > skeleton.Joints[JointType.Head].Position.Y)
             {
                 if (skeleton.Joints[JointType.HandLeft].Position.Y > skeleton.Joints[JointType.Head].Position.Y)
                 {
-                    MessageBox.Show("Pause");
+                    w.isPaused = true;
                 }
             }
         }
