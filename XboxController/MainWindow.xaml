@@ -88,11 +88,12 @@
             <Button Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="3" Grid.RowSpan="1" Content="Restart" BorderBrush="#FF979797" Background="#FF008AFD" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
             <Button Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="4" Grid.RowSpan="1" Content="Quit" BorderBrush="#FF979797" Background="#FF008AFD" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
         </Grid>
-        <Grid x:Name="calibrationScreen">
-            <Ellipse HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-25 -25" Height="50" Width="50" Fill="Green"/>
-            <Ellipse HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="-25 -25" Height="50" Width="50" Fill="Gray"/>
-            <Ellipse HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="-25 -25" Height="50" Width="50" Fill="Gray"/>
-            <Ellipse HorizontalAlignment="Right" VerticalAlignment="Top" Margin="-25 -25" Height="50" Width="50" Fill="Gray"/>
+        <Grid x:Name="calibrationScreen" Background="Black" Opacity="0.85" Visibility="Hidden">
+            <TextBlock Text="Please point at the Green dot and press the trigger button" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" TextWrapping="Wrap" Foreground="White"/>
+            <Ellipse x:Name="topLeft" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-25 -25" Height="50" Width="50" Fill="Green"/>
+            <Ellipse x:Name="bottomLeft" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="-25 -25" Height="50" Width="50" Fill="Gray"/>
+            <Ellipse x:Name="bottomRight" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="-25 -25" Height="50" Width="50" Fill="Gray"/>
+            <Ellipse x:Name="topRight" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="-25 -25" Height="50" Width="50" Fill="Gray"/>
         </Grid>
         <!-- MAIN STARTUP SCREEN-->
         <Grid x:Name="StartScreen">

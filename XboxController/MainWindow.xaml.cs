@@ -129,5 +129,10 @@ namespace XboxController
             PauseMenu.Visibility = Visibility.Visible;
         }
 
+        public void calibrateTargeting()
+        {
+            calibrationScreen.Visibility = Visibility.Visible;
+        }
+
     }
 }
