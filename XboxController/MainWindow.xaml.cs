@@ -24,6 +24,7 @@ namespace XboxController
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// //change
     public partial class MainWindow : Window
     {
 
@@ -108,6 +109,7 @@ namespace XboxController
         void _timer_Tick(object sender, EventArgs e)
         {
             DisplayControllerInformation();
+            MenuControls();
         }
 
         void DisplayControllerInformation()
@@ -142,6 +144,38 @@ namespace XboxController
             //distance (y) doesn't matter, find anything in 3d space that is within the x and y coordinates and then mark it as hit
         }
 
+        //Xbox menu controls 
+        void MenuControls()
+        {
+            initalizeController();
+            var GPstate = GamePad.GetState(PlayerIndex.One);
+            if (PauseMenu.IsVisible)
+            {
+                if (GPstate.IsButtonDown(Buttons.A))
+                {
+                    PauseMenu.Visibility = Visibility.Hidden;
+                }
+                else if (GPstate.IsButtonDown(Buttons.X))
+                {
+                    OptionsMenu.Visibility = Visibility.Visible;
+                }
+                else if (GPstate.IsButtonDown(Buttons.B))
+                {
+                    OptionsMenu.Visibility = Visibility.Hidden;
+                    //Quit function for PauseMenu btnQuit needed
+                }
+                else if (GPstate.IsButtonDown(Buttons.Y))
+                {
+                    //Restart function needed for PauseMenu btnRestart 
+                }
+                else if (GPstate.IsButtonDown(Buttons.Start))
+                {
+                    OptionsMenu.Visibility = Visibility.Hidden;
+                    PauseMenu.Visibility = Visibility.Hidden;
+                }
+            }
+        }
+
         public void pauseMenuVisibility(object sender, EventArgs e)
         {
             PauseMenu.Visibility = Visibility.Visible;
@@ -160,10 +194,21 @@ namespace XboxController
             isCalibrated = true;
             calibrationScreen.Visibility = Visibility.Hidden;
         }
-        
-        public void quit()
+        // button click methods
+        private void btnResume_Click(object sender, RoutedEventArgs e)
         {
+            PauseMenu.Visibility = Visibility.Hidden;
+        }
 
+        private void btnOptions_Click(object sender, RoutedEventArgs e)
+        {
+            OptionsMenu.Visibility = Visibility.Visible;
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            OptionsMenu.Visibility = Visibility.Hidden;
         }
     }
+}
 }

@@ -83,10 +83,10 @@
                 <ColumnDefinition Width="100px"/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="Menu" Foreground="White" FontSize="35" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <Button Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="1" Grid.RowSpan="1" Content="Resume" BorderBrush="#FF979797" Background="#FF008AFD" Foreground="White" FontSize="30" Margin="5px" VerticalContentAlignment="Center" />
-            <Button Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="2" Grid.RowSpan="1" Content="Options" BorderBrush="#FF979797" Background="#FF008AFD" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-            <Button Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="3" Grid.RowSpan="1" Content="Restart" BorderBrush="#FF979797" Background="#FF008AFD" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-            <Button Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="4" Grid.RowSpan="1" Content="Quit" BorderBrush="#FF979797" Background="#FF008AFD" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            <Button x:Name="btnResume" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="1" Grid.RowSpan="1" Content="Resume" BorderBrush="#FF979797" Background="#FF15B215" Foreground="White" FontSize="30" Margin="5px" VerticalContentAlignment="Center" Click="btnResume_Click" />
+            <Button x:Name="btnOptions" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="2" Grid.RowSpan="1" Content="Options" BorderBrush="#FF979797" Background="#FF008AFD" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="btnOptions_Click" />
+            <Button x:Name="btnRestart" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="3" Grid.RowSpan="1" Content="Restart" BorderBrush="#FF979797" Background="#FFDCDC1E" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            <Button x:Name="btnQuit" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="4" Grid.RowSpan="1" Content="Quit" BorderBrush="#FF979797" Background="#FFFD0000" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
         </Grid>
         <Grid x:Name="calibrationScreen" Background="Black" Opacity="0.85" Visibility="Hidden">
             <TextBlock Text="Please point at the Green dot and press the trigger button" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" TextWrapping="Wrap" Foreground="White"/>
@@ -124,5 +124,27 @@
             <Ellipse x:Name="ellipiseHandLeft" Fill="Blue" HorizontalAlignment="Left" Height="50"  Stroke="Black" VerticalAlignment="Top" Width="50" Opacity="0.75"/>
             <Ellipse x:Name="actualTarget" Stroke="Green" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="50" Opacity="0.75" StrokeThickness="6"/>
         </Canvas>
+        <!-- OPTIONS MENU -->
+        <Grid x:Name="OptionsMenu" Opacity="0.75" Background="Black" Visibility="Visible">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100px"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100px"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Options Menu" Foreground="White" FontSize="35" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Button x:Name="btnOption1" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="1" Grid.RowSpan="1" Content="Option1" BorderBrush="#FF979797" Background="#FF15B215" Foreground="White" FontSize="30" Margin="5px" VerticalContentAlignment="Center" />
+            <Button x:Name="btnOption2" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="2" Grid.RowSpan="1" Content="Option2" BorderBrush="#FF979797" Background="#FF008AFD" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            <Button x:Name="btnOption3" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="3" Grid.RowSpan="1" Content="Option3" BorderBrush="#FF979797" Background="#FFDCDC1E" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            <Button x:Name="btnBack" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="4" Grid.RowSpan="1" Content="Back" BorderBrush="#FF979797" Background="#FFFD0000" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="btnBack_Click" />
+        </Grid>
+
     </Grid>
 </Window>
