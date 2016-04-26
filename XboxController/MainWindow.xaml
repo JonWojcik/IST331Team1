@@ -68,7 +68,7 @@
             <TextBlock x:Name="Level" Grid.Row="0" Grid.RowSpan="1" HorizontalAlignment="Right" Padding="25px 0px" TextWrapping="Wrap" Text="Level:" VerticalAlignment="Center"/>
         </Grid>
         <!-- PAUSE MENU -->
-        <Grid x:Name="PauseMenu" Opacity="0.75" Background="Black" Visibility="Visible">
+        <Grid x:Name="PauseMenu" Opacity="0.75" Background="Black" Visibility="Hidden">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -82,7 +82,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="100px"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Menu" Foreground="White" FontSize="35" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Text="Pause Menu" Foreground="White" FontSize="35" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <Button x:Name="btnResume" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="1" Grid.RowSpan="1" Content="Resume" BorderBrush="#FF979797" Background="#FF15B215" Foreground="White" FontSize="30" Margin="5px" VerticalContentAlignment="Center" Click="btnResume_Click" />
             <Button x:Name="btnOptions" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="2" Grid.RowSpan="1" Content="Options" BorderBrush="#FF979797" Background="#FF008AFD" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="btnOptions_Click" />
             <Button x:Name="btnRestart" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="3" Grid.RowSpan="1" Content="Restart" BorderBrush="#FF979797" Background="#FFDCDC1E" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
@@ -140,9 +140,7 @@
                 <ColumnDefinition Width="100px"/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="Options Menu" Foreground="White" FontSize="35" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <Button x:Name="btnOption1" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="1" Grid.RowSpan="1" Content="Option1" BorderBrush="#FF979797" Background="#FF15B215" Foreground="White" FontSize="30" Margin="5px" VerticalContentAlignment="Center" />
-            <Button x:Name="btnOption2" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="2" Grid.RowSpan="1" Content="Option2" BorderBrush="#FF979797" Background="#FF008AFD" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-            <Button x:Name="btnOption3" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="3" Grid.RowSpan="1" Content="Option3" BorderBrush="#FF979797" Background="#FFDCDC1E" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            <Button x:Name="btnStartMenu" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="2" Grid.RowSpan="1" Content="Start Menu" BorderBrush="#FF979797" Background="#FF1EDC27" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
             <Button x:Name="btnBack" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="4" Grid.RowSpan="1" Content="Back" BorderBrush="#FF979797" Background="#FFFD0000" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="btnBack_Click" />
         </Grid>
 
