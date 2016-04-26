@@ -30,7 +30,6 @@ namespace XboxController
 
         DispatcherTimer _timer = new DispatcherTimer();
         KinectSensor _sensor;
-        static Gestures _gesture = new Gestures();
         public bool isPaused = false;
         public bool isCalibrated = false;
         public double windowHeight;
@@ -97,13 +96,25 @@ namespace XboxController
                             HeadPosition.Text = "HeadPosition: x" + jointCollection[JointType.Head].Position.X + "y" + jointCollection[JointType.Head].Position.Y;
                             camMain.Position = new Point3D(jointCollection[JointType.Head].Position.X * -10, 10, jointCollection[JointType.Head].Position.Y * 20);
 
-                            _gesture.handsAboveHead(user);
+                            handsAboveHead(user);
                         }
                     }
                 }
             }
-        } //Closing Sensor_SkeletonFrameReady method
+        }
+        //Closing Sensor_SkeletonFrameReady method
 
+        //Gesture for pausing game if hands are above head
+        public void handsAboveHead(Skeleton skeleton)
+        {
+            if (skeleton.Joints[JointType.HandRight].Position.Y > skeleton.Joints[JointType.Head].Position.Y)
+            {
+                if (skeleton.Joints[JointType.HandLeft].Position.Y > skeleton.Joints[JointType.Head].Position.Y)
+                {
+                    pauseMenuVisibility();
+                }
+            }
+        }
 
         //Xbox controller stuff
 
@@ -205,7 +216,7 @@ namespace XboxController
             }
         }
 
-        public void pauseMenuVisibility(object sender, EventArgs e)
+        public void pauseMenuVisibility()
         {
             PauseMenu.Visibility = Visibility.Visible;
         }
@@ -228,8 +239,8 @@ namespace XboxController
         {
             switch (e.Key)
             {
-                case Key.D1:
-                    PauseMenu.Visibility = Visibility.Visible;
+                case Key.Escape:
+                    MessageBox.Show("Enter");
                     break;
                 
             }
