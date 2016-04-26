@@ -48,26 +48,27 @@ namespace XboxController
 
             windowHeight = viewport3D1.Height;
             windowWidth = viewport3D1.Width;
-             _sensor = KinectSensor.KinectSensors.Where(
-                s => s.Status == KinectStatus.Connected).FirstOrDefault();
-             foreach (KinectSensor sensor in KinectSensor.KinectSensors)
-             {
-                 if (_sensor != null)
-                 {
-                     _sensor.ColorStream.Enable();
-                     _sensor.DepthStream.Enable();
-                     _sensor.SkeletonStream.Enable();
-                     _sensor.AllFramesReady += _sensor_AllFramesReady;
-                     try
-                     {
-                         this._sensor.Start();
-                     }
-                     catch (InvalidOperationException)
-                     {
-                         this._sensor = null;
-                     }
-                 }
-             }
+            _sensor = KinectSensor.KinectSensors.Where(
+               s => s.Status == KinectStatus.Connected).FirstOrDefault();
+            foreach (KinectSensor sensor in KinectSensor.KinectSensors)
+            {
+                if (_sensor != null)
+                {
+                    _sensor.ColorStream.Enable();
+                    _sensor.DepthStream.Enable();
+                    _sensor.SkeletonStream.Enable();
+                    _sensor.AllFramesReady += _sensor_AllFramesReady;
+                    try
+                    {
+                        this._sensor.Start();
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        this._sensor = null;
+                    }
+                }
+            }
+            StartScreen.Visibility = Visibility.Visible;
         }
 
         //Skeleton Tracking
@@ -160,15 +161,15 @@ namespace XboxController
                 else if (GPstate.IsButtonDown(Buttons.X))
                 {
                     OptionsMenu.Visibility = Visibility.Visible;
+                    PauseMenu.Visibility = Visibility.Hidden;
                 }
                 else if (GPstate.IsButtonDown(Buttons.B))
                 {
-                    OptionsMenu.Visibility = Visibility.Hidden;
-                    //Quit function for PauseMenu btnQuit needed
+                    Environment.Exit(1);
                 }
                 else if (GPstate.IsButtonDown(Buttons.Y))
                 {
-                    //Restart function needed for PauseMenu btnRestart 
+                    startGame(); 
                 }
                 else if (GPstate.IsButtonDown(Buttons.Start))
                 {
@@ -186,22 +187,35 @@ namespace XboxController
                 else if (GPstate.IsButtonDown(Buttons.X))
                 {
                     OptionsMenu.Visibility = Visibility.Visible;
+                    StartScreen.Visibility = Visibility.Hidden;
                 }
                 else if (GPstate.IsButtonDown(Buttons.B))
                 {
-                    OptionsMenu.Visibility = Visibility.Hidden;
-                    //Quit function for PauseMenu btnQuit needed
+                    Environment.Exit(1);
                 }
                 else if (GPstate.IsButtonDown(Buttons.Y))
                 {
-                    OptionsMenu.Visibility = Visibility.Visible; 
+                    OptionsMenu.Visibility = Visibility.Visible;
                 }
                 else if (GPstate.IsButtonDown(Buttons.Start))
                 {
                     OptionsMenu.Visibility = Visibility.Hidden;
                     PauseMenu.Visibility = Visibility.Hidden;
+                    StartScreen.Visibility = Visibility.Hidden;
+                    startGame();
                 }
-
+            }
+            if (OptionsMenu.IsVisible)
+            {
+                if (GPstate.IsButtonDown(Buttons.A))
+                {
+                    StartScreen.Visibility = Visibility.Visible;
+                    OptionsMenu.Visibility = Visibility.Hidden;
+                }
+                else if (GPstate.IsButtonDown(Buttons.B))
+                {
+                    OptionsMenu.Visibility = Visibility.Hidden;
+                }
             }
         }
 
@@ -231,7 +245,7 @@ namespace XboxController
                 case Key.D1:
                     PauseMenu.Visibility = Visibility.Visible;
                     break;
-                
+
             }
 
         }

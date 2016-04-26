@@ -21,9 +21,9 @@ namespace XboxController
 {
     class Gestures
     {
-                readonly int WINDOW_SIZE = 50; //Number of frames for that gesture to last
-                int _frameCount = 0; //number of frames we ask for data is called window size
-                MainWindow w = new MainWindow();
+        readonly int WINDOW_SIZE = 50; //Number of frames for that gesture to last
+        int _frameCount = 0; //number of frames we ask for data is called window size
+        MainWindow w = new MainWindow();
 
         //Gesture for pausing game if hands are above head
         public void handsAboveHead(Skeleton skeleton)
