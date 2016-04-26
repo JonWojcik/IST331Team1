@@ -32,7 +32,7 @@ namespace XboxController
             {
                 if (skeleton.Joints[JointType.HandLeft].Position.Y > skeleton.Joints[JointType.Head].Position.Y)
                 {
-                    w.isPaused = true;
+                    MessageBox.Show("Pause");
                 }
             }
         }

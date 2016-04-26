@@ -96,6 +96,7 @@ namespace XboxController
                             RightHandPosition.Text = "RightHandPosition: x" + jointCollection[JointType.HandRight].Position.X + "y" + jointCollection[JointType.HandRight].Position.Y;
                             HeadPosition.Text = "HeadPosition: x" + jointCollection[JointType.Head].Position.X + "y" + jointCollection[JointType.Head].Position.Y;
                             camMain.Position = new Point3D(jointCollection[JointType.Head].Position.X * -10, 10, jointCollection[JointType.Head].Position.Y * 20);
+
                             _gesture.handsAboveHead(user);
                         }
                     }
@@ -110,7 +111,6 @@ namespace XboxController
         {
             DisplayControllerInformation();
             MenuControls();
-            checkPause();
         }
 
         void DisplayControllerInformation()
@@ -145,13 +145,6 @@ namespace XboxController
             //distance (y) doesn't matter, find anything in 3d space that is within the x and y coordinates and then mark it as hit
         }
 
-        public void checkPause()
-        {
-            if (isPaused == true)
-            {
-                PauseMenu.Visibility = Visibility.Visible;
-            }
-        }
 
         //Xbox menu controls 
         void MenuControls()
@@ -163,7 +156,6 @@ namespace XboxController
                 if (GPstate.IsButtonDown(Buttons.A))
                 {
                     PauseMenu.Visibility = Visibility.Hidden;
-                    isPaused = false;
                 }
                 else if (GPstate.IsButtonDown(Buttons.X))
                 {
@@ -182,15 +174,40 @@ namespace XboxController
                 {
                     OptionsMenu.Visibility = Visibility.Hidden;
                     PauseMenu.Visibility = Visibility.Hidden;
-                    isPaused = false;
                 }
+            }
+            if (StartScreen.IsVisible)
+            {
+                if (GPstate.IsButtonDown(Buttons.A))
+                {
+                    StartScreen.Visibility = Visibility.Hidden;
+                    startGame();
+                }
+                else if (GPstate.IsButtonDown(Buttons.X))
+                {
+                    OptionsMenu.Visibility = Visibility.Visible;
+                }
+                else if (GPstate.IsButtonDown(Buttons.B))
+                {
+                    OptionsMenu.Visibility = Visibility.Hidden;
+                    //Quit function for PauseMenu btnQuit needed
+                }
+                else if (GPstate.IsButtonDown(Buttons.Y))
+                {
+                    OptionsMenu.Visibility = Visibility.Visible; 
+                }
+                else if (GPstate.IsButtonDown(Buttons.Start))
+                {
+                    OptionsMenu.Visibility = Visibility.Hidden;
+                    PauseMenu.Visibility = Visibility.Hidden;
+                }
+
             }
         }
 
         public void pauseMenuVisibility(object sender, EventArgs e)
         {
             PauseMenu.Visibility = Visibility.Visible;
-            isPaused = true;
         }
 
         public void calibrateTargeting()
@@ -206,11 +223,23 @@ namespace XboxController
             isCalibrated = true;
             calibrationScreen.Visibility = Visibility.Hidden;
         }
+        //Keyboard support
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.D1:
+                    PauseMenu.Visibility = Visibility.Visible;
+                    break;
+                
+            }
+
+        }
+
         // button click methods
         private void btnResume_Click(object sender, RoutedEventArgs e)
         {
             PauseMenu.Visibility = Visibility.Hidden;
-            isPaused = false;
         }
 
         private void btnOptions_Click(object sender, RoutedEventArgs e)
