@@ -49,7 +49,6 @@ namespace XboxController
                      _sensor.ColorStream.Enable();
                      _sensor.DepthStream.Enable();
                      _sensor.SkeletonStream.Enable();
-                     _sensor.DepthStream.Range = DepthRange.Near;
                      _sensor.AllFramesReady += _sensor_AllFramesReady;
                      try
                      {
@@ -84,8 +83,11 @@ namespace XboxController
                             Console.WriteLine(jointCollection[JointType.ElbowRight].TrackingState.ToString()); //Debugging 
                             Console.WriteLine(jointCollection[JointType.HandRight].TrackingState.ToString()); //Debugging 
                             Canvas.SetLeft(ellipiseHandRight, jointCollection[JointType.HandRight].Position.X * 200); //Debugging 
-                            Canvas.SetTop(ellipiseHandRight, jointCollection[JointType.HandRight].Position.Y * -200); //Debugging 
-                            camMain.Position = new Point3D(jointCollection[JointType.Head].Position.X, jointCollection[JointType.Head].Position.Y, 2);
+                            Canvas.SetTop(ellipiseHandRight, jointCollection[JointType.HandRight].Position.Y * -200); //Debugging
+                            LeftHandPosition.Text = "LeftHandPosition: x" + jointCollection[JointType.HandLeft].Position.X + "y" + jointCollection[JointType.HandLeft].Position.Y;
+                            RightHandPosition.Text = "RightHandPosition: x" + jointCollection[JointType.HandRight].Position.X + "y" + jointCollection[JointType.HandRight].Position.Y;
+                            HeadPosition.Text = "HeadPosition: x" + jointCollection[JointType.Head].Position.X + "y" + jointCollection[JointType.Head].Position.Y;
+                            camMain.Position = new Point3D(jointCollection[JointType.Head].Position.X * -10, 10, jointCollection[JointType.Head].Position.Y * 20);
                             _gesture.handsAboveHead(user);
                         }
                     }

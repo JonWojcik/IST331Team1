@@ -92,7 +92,10 @@
         <Grid x:Name="StartScreen">
 
         </Grid>
-        <Canvas>
+        <Canvas x:Name="debugging">
+            <TextBlock x:Name="HeadPosition" Grid.Row="0"  HorizontalAlignment="Left" Padding="25px 0px" TextWrapping="Wrap" Text="HeadPosition:" VerticalAlignment="Center" Canvas.Left="10" Canvas.Top="76"/>
+            <TextBlock x:Name="RightHandPosition" Grid.Row="0"  HorizontalAlignment="Right" Padding="25px 0px" TextWrapping="Wrap" Text="RightHandPosition:" VerticalAlignment="Center" Canvas.Top="55"/>
+            <TextBlock x:Name="LeftHandPosition" Grid.Row="0"  HorizontalAlignment="Right" Padding="25px 0px" TextWrapping="Wrap" Text="LeftHandPosition:" VerticalAlignment="Center" Canvas.Top="92"/>
             <Ellipse x:Name="ellipiseHandRight" Fill="Red" HorizontalAlignment="Left" Height="50" Margin="387,269,0,-47" Stroke="Black" VerticalAlignment="Top" Width="50" Opacity="0.75"/>
             <Ellipse x:Name="ellipiseHandLeft" Fill="Blue" HorizontalAlignment="Left" Height="50"  Stroke="Black" VerticalAlignment="Top" Width="50" Opacity="0.75"/>
         </Canvas>
