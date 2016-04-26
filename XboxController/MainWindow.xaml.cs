@@ -101,6 +101,7 @@ namespace XboxController
         void _timer_Tick(object sender, EventArgs e)
         {
             DisplayControllerInformation();
+            MenuControls();
         }
 
         void DisplayControllerInformation()
@@ -124,6 +125,33 @@ namespace XboxController
             MessageBox.Show("trigger");
         }
 
+        //Xbox menu controls 
+        void MenuControls()
+        {
+            initalizeController();
+            var GPstate = GamePad.GetState(PlayerIndex.One);
+            if (PauseMenu.IsVisible)
+            {
+                if (GPstate.IsButtonDown(Buttons.A))
+                {
+                    PauseMenu.Visibility = Visibility.Hidden;
+                }
+                else if (GPstate.IsButtonDown(Buttons.X))
+                {
+                    OptionsMenu.Visibility = Visibility.Visible;
+                }
+                else if (GPstate.IsButtonDown(Buttons.B))
+                {
+                    OptionsMenu.Visibility = Visibility.Hidden;
+                    //Quit function for PauseMenu btnQuit needed
+                }
+                else if (GPstate.IsButtonDown(Buttons.Y))
+                {
+                    //Restart function needed for PauseMenu btnRestart 
+                }
+            }
+        }
+
         public void pauseMenuVisibility(object sender, EventArgs e)
         {
             PauseMenu.Visibility = Visibility.Visible;
@@ -133,6 +161,5 @@ namespace XboxController
         {
             calibrationScreen.Visibility = Visibility.Visible;
         }
-
     }
 }
