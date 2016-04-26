@@ -125,7 +125,7 @@
             <Ellipse x:Name="actualTarget" Stroke="Green" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="50" Opacity="0.75" StrokeThickness="6"/>
         </Canvas>
         <!-- OPTIONS MENU -->
-        <Grid x:Name="OptionsMenu" Opacity="0.75" Background="Black" Visibility="Visible">
+        <Grid x:Name="OptionsMenu" Opacity="0.75" Background="Black" Visibility="Hidden">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>

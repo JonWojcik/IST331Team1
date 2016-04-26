@@ -110,6 +110,7 @@ namespace XboxController
         {
             DisplayControllerInformation();
             MenuControls();
+            checkPause();
         }
 
         void DisplayControllerInformation()
@@ -144,6 +145,14 @@ namespace XboxController
             //distance (y) doesn't matter, find anything in 3d space that is within the x and y coordinates and then mark it as hit
         }
 
+        public void checkPause()
+        {
+            if (isPaused == true)
+            {
+                PauseMenu.Visibility = Visibility.Visible;
+            }
+        }
+
         //Xbox menu controls 
         void MenuControls()
         {
@@ -154,6 +163,7 @@ namespace XboxController
                 if (GPstate.IsButtonDown(Buttons.A))
                 {
                     PauseMenu.Visibility = Visibility.Hidden;
+                    isPaused = false;
                 }
                 else if (GPstate.IsButtonDown(Buttons.X))
                 {
@@ -172,6 +182,7 @@ namespace XboxController
                 {
                     OptionsMenu.Visibility = Visibility.Hidden;
                     PauseMenu.Visibility = Visibility.Hidden;
+                    isPaused = false;
                 }
             }
         }
@@ -179,6 +190,7 @@ namespace XboxController
         public void pauseMenuVisibility(object sender, EventArgs e)
         {
             PauseMenu.Visibility = Visibility.Visible;
+            isPaused = true;
         }
 
         public void calibrateTargeting()
@@ -198,6 +210,7 @@ namespace XboxController
         private void btnResume_Click(object sender, RoutedEventArgs e)
         {
             PauseMenu.Visibility = Visibility.Hidden;
+            isPaused = false;
         }
 
         private void btnOptions_Click(object sender, RoutedEventArgs e)
@@ -210,5 +223,4 @@ namespace XboxController
             OptionsMenu.Visibility = Visibility.Hidden;
         }
     }
-}
 }
