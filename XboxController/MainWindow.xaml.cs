@@ -150,6 +150,11 @@ namespace XboxController
                 {
                     //Restart function needed for PauseMenu btnRestart 
                 }
+                else if (GPstate.IsButtonDown(Buttons.Start))
+                {
+                    OptionsMenu.Visibility = Visibility.Hidden;
+                    PauseMenu.Visibility = Visibility.Hidden;
+                }
             }
         }
 
@@ -161,6 +166,21 @@ namespace XboxController
         public void calibrateTargeting()
         {
             calibrationScreen.Visibility = Visibility.Visible;
+        }
+        // button click methods
+        private void btnResume_Click(object sender, RoutedEventArgs e)
+        {
+            PauseMenu.Visibility = Visibility.Hidden;
+        }
+
+        private void btnOptions_Click(object sender, RoutedEventArgs e)
+        {
+            OptionsMenu.Visibility = Visibility.Visible;
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            OptionsMenu.Visibility = Visibility.Hidden;
         }
     }
 }
