@@ -31,6 +31,10 @@ namespace XboxController
         DispatcherTimer _timer = new DispatcherTimer();
         KinectSensor _sensor;
         static Gestures _gesture = new Gestures();
+        public bool isPaused = false;
+        public bool isCalibrated = false;
+        public double windowHeight;
+        public double windowWidth;
 
         public MainWindow()
         {
@@ -41,6 +45,9 @@ namespace XboxController
         }
         private void Window_Loaded_1(object sender, RoutedEventArgs e)
         {
+
+            windowHeight = viewport3D1.Height;
+            windowWidth = viewport3D1.Width;
              _sensor = KinectSensor.KinectSensors.Where(
                 s => s.Status == KinectStatus.Connected).FirstOrDefault();
              foreach (KinectSensor sensor in KinectSensor.KinectSensors)
@@ -89,6 +96,7 @@ namespace XboxController
                             RightHandPosition.Text = "RightHandPosition: x" + jointCollection[JointType.HandRight].Position.X + "y" + jointCollection[JointType.HandRight].Position.Y;
                             HeadPosition.Text = "HeadPosition: x" + jointCollection[JointType.Head].Position.X + "y" + jointCollection[JointType.Head].Position.Y;
                             camMain.Position = new Point3D(jointCollection[JointType.Head].Position.X * -10, 10, jointCollection[JointType.Head].Position.Y * 20);
+
                             _gesture.handsAboveHead(user);
                         }
                     }
@@ -121,10 +129,22 @@ namespace XboxController
             GamePad.SetVibration(PlayerIndex.One, 0, 0);
         }
 
+        public void startGame()
+        {
+            StartScreen.Visibility = Visibility.Hidden;
+            if (isCalibrated == false)
+            {
+                calibrateTargeting();
+            }
+        }
+
         void triggerPull()
         {
             MessageBox.Show("trigger");
+            //get position of shot (x, and y)
+            //distance (y) doesn't matter, find anything in 3d space that is within the x and y coordinates and then mark it as hit
         }
+
 
         //Xbox menu controls 
         void MenuControls()
@@ -156,6 +176,33 @@ namespace XboxController
                     PauseMenu.Visibility = Visibility.Hidden;
                 }
             }
+            if (StartScreen.IsVisible)
+            {
+                if (GPstate.IsButtonDown(Buttons.A))
+                {
+                    StartScreen.Visibility = Visibility.Hidden;
+                    startGame();
+                }
+                else if (GPstate.IsButtonDown(Buttons.X))
+                {
+                    OptionsMenu.Visibility = Visibility.Visible;
+                }
+                else if (GPstate.IsButtonDown(Buttons.B))
+                {
+                    OptionsMenu.Visibility = Visibility.Hidden;
+                    //Quit function for PauseMenu btnQuit needed
+                }
+                else if (GPstate.IsButtonDown(Buttons.Y))
+                {
+                    OptionsMenu.Visibility = Visibility.Visible; 
+                }
+                else if (GPstate.IsButtonDown(Buttons.Start))
+                {
+                    OptionsMenu.Visibility = Visibility.Hidden;
+                    PauseMenu.Visibility = Visibility.Hidden;
+                }
+
+            }
         }
 
         public void pauseMenuVisibility(object sender, EventArgs e)
@@ -166,7 +213,29 @@ namespace XboxController
         public void calibrateTargeting()
         {
             calibrationScreen.Visibility = Visibility.Visible;
+            //Math
+            //hand used to aim x and y max and min
+            //average the height and width and then divide by 2 to get the center
+            //get difference between points at x and y measurements
+            //measures of arm movement divided by screen measusurements gets how many meters moved over screen distance
+            //
+
+            isCalibrated = true;
+            calibrationScreen.Visibility = Visibility.Hidden;
         }
+        //Keyboard support
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.D1:
+                    PauseMenu.Visibility = Visibility.Visible;
+                    break;
+                
+            }
+
+        }
+
         // button click methods
         private void btnResume_Click(object sender, RoutedEventArgs e)
         {
