@@ -68,7 +68,7 @@
             <TextBlock x:Name="Level" Grid.Row="0" Grid.RowSpan="1" HorizontalAlignment="Right" Padding="25px 0px" TextWrapping="Wrap" Text="Level:" VerticalAlignment="Center"/>
         </Grid>
         <!-- PAUSE MENU -->
-        <Grid x:Name="PauseMenu" Opacity="0.75" Background="Black" Visibility="Hidden">
+        <Grid x:Name="PauseMenu" Opacity="0.75" Background="Black" Visibility="Visible">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
