@@ -101,6 +101,11 @@ namespace XboxController
                             gameView.Position = new Point3D(jointCollection[JointType.Head].Position.X * -10, 10, jointCollection[JointType.Head].Position.Y * 20);
 
                             handsAboveHead(user);
+                            if (0 < jointCollection[JointType.HandRight].X > 1 && 2 < jointCollection[JointType.HandRight].Y < 4)
+                            {
+                                
+
+                            }
                         }
                     }
                 }
