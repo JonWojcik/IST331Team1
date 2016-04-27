@@ -67,7 +67,7 @@ namespace XboxController
                     }
                 }
             }
-            StartScreen.Visibility = Visibility.Visible;
+
         }
 
         //Skeleton Tracking
@@ -102,6 +102,11 @@ namespace XboxController
                     }
                 }
             }
+        }
+
+        public void startGame()
+        {
+            StartScreen.Visibility = Visibility.Hidden;
         }
         //Closing Sensor_SkeletonFrameReady method
 
@@ -141,14 +146,7 @@ namespace XboxController
             GamePad.SetVibration(PlayerIndex.One, 0, 0);
         }
 
-        public void startGame()
-        {
-            StartScreen.Visibility = Visibility.Hidden;
-            if (isCalibrated == false)
-            {
-                calibrateTargeting();
-            }
-        }
+
 
         void triggerPull()
         {
@@ -256,6 +254,9 @@ namespace XboxController
                 case Key.Escape:
                     MessageBox.Show("Enter");
                     break;
+                case Key.Back:
+                    MessageBox.Show("Back");
+                    break;
 
             }
 
@@ -276,5 +277,6 @@ namespace XboxController
         {
             OptionsMenu.Visibility = Visibility.Hidden;
         }
+
     }
 }

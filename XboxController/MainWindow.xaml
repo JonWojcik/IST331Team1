@@ -51,8 +51,28 @@
                             </GeometryModel3D.Material>
                         </GeometryModel3D>
 
-
+                        <GeometryModel3D>
+                            <GeometryModel3D.BackMaterial>
+                                <DiffuseMaterial Color="#FF50A0FF" Brush="#FF60F3D2"/>
+                            </GeometryModel3D.BackMaterial>
+                            <GeometryModel3D.Geometry>
+                                <MeshGeometry3D x:Name="Scope"
+                                Positions="1 -2 0  1 -1 0  -1 1 0  1 1 0"
+              Normals="0 0 1  0 0 1  0 0 1  0 0 1"
+              TextureCoordinates="0 1  1 1  0 0  1 0   "
+              TriangleIndices="0 1 2  1 3 2">
+                                </MeshGeometry3D>
+                            </GeometryModel3D.Geometry>
+                            <GeometryModel3D.Material>
+                                <DiffuseMaterial x:Name="matDiffuseScope">
+                                    <DiffuseMaterial.Brush>
+                                        <SolidColorBrush Color="Aqua"/>
+                                    </DiffuseMaterial.Brush>
+                                </DiffuseMaterial>
+                            </GeometryModel3D.Material>
+                        </GeometryModel3D>
                     </Model3DGroup>
+
                 </ModelVisual3D.Content>
             </ModelVisual3D>
         </Viewport3D>
@@ -111,11 +131,12 @@
                 <ColumnDefinition Width="100px"/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="Game Title" Foreground="White" FontSize="35" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <Button Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="1" Grid.RowSpan="1" Content="Start" BorderBrush="#FF979797" Background="#FF04DC18" Foreground="White" FontSize="30" Margin="5px" VerticalContentAlignment="Center" />
+            <Button x:Name="StartBtn" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="1" Grid.RowSpan="1" Content="Start" BorderBrush="#FF979797" Background="#FF04DC18" Foreground="White" FontSize="30" Margin="5px" VerticalContentAlignment="Center" />
             <Button Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="2" Grid.RowSpan="1" Content="Settings" BorderBrush="#FF979797" Background="#FFCFA900" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
             <Button Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="3" Grid.RowSpan="1" Content="High Scores" BorderBrush="#FF979797" Background="#FF008AFD" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
             <Button Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="4" Grid.RowSpan="1" Content="Quit" BorderBrush="#FF979797" Background="#FFA80404" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
         </Grid>
+        <!--Section for debugging tools-->
         <Canvas x:Name="debugging">
             <TextBlock x:Name="HeadPosition" Grid.Row="0"  HorizontalAlignment="Left" Padding="25px 0px" TextWrapping="Wrap" Text="HeadPosition:" VerticalAlignment="Center" Canvas.Left="10" Canvas.Top="76"/>
             <TextBlock x:Name="RightHandPosition" Grid.Row="0"  HorizontalAlignment="Right" Padding="25px 0px" TextWrapping="Wrap" Text="RightHandPosition:" VerticalAlignment="Center" Canvas.Top="55"/>
