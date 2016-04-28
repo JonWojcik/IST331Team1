@@ -96,7 +96,7 @@
                     </ModelVisual3D>
                     <ModelVisual3D x:Name="ArrowCenter">
                         <ModelVisual3D.Content>
-                            <GeometryModel3D x:Name="ArrowLeft_Cone" d:Bounds="0.3106429874897,3.18037796020508,6.60477113723755,0.341026991605759,0.341027021408081,0.341026782989502">
+                            <GeometryModel3D x:Name="ArrowCenterModel" d:Bounds="0.3106429874897,3.18037796020508,6.60477113723755,0.341026991605759,0.341027021408081,0.341026782989502">
                                 <GeometryModel3D.Geometry>
                                     <MeshGeometry3D Positions="0.63868999,3.4161429,6.6047721 0.48115599,3.3508911,6.9457979 0.64839298,3.384156,6.6047721 0.65166998,3.3508911,6.6047721 0.64839298,3.317626,6.6047721 0.62293297,3.4456229,6.6047721 0.60172802,3.471462,6.6047721 0.57588899,3.4926679,6.6047721 0.54640901,3.508425,6.6047721 0.514422,3.5181279,6.6047721 0.481157,3.521405,6.6047721 0.447891,3.5181279,6.6047711 0.41590399,3.508425,6.6047711
 0.38642401,3.4926679,6.6047711 0.360585,3.471462,6.6047711 0.33938,3.4456229,6.6047711 0.32362199,3.4161439,6.6047711 0.31391901,3.3841569,6.6047711 0.31064299,3.3508911,6.6047711 0.31391901,3.317626,6.6047711 0.32362199,3.285639,6.6047711 0.33937901,3.2561591,6.6047711 0.360585,3.23032,6.6047711 0.38642401,3.209115,6.6047711 0.41590399,3.193357,6.6047711 0.447891,3.1836541,6.6047711
@@ -115,7 +115,7 @@
                     </ModelVisual3D>
                     <ModelVisual3D x:Name="ArrowLeft">
                         <ModelVisual3D.Content>
-                            <GeometryModel3D x:Name="Cube_002_Cube_004" d:Bounds="4.10377788543701,2.40517807006836,5.55100011825562,0.34102725982666,0.341027021408081,0.341026782989502">
+                            <GeometryModel3D x:Name="ArrowLeftModel" d:Bounds="4.10377788543701,2.40517807006836,5.55100011825562,0.34102725982666,0.341027021408081,0.341026782989502">
                                 <GeometryModel3D.Geometry>
                                     <MeshGeometry3D Positions="4.4318252,2.640944,5.5510011 4.274291,2.5756919,5.8920269 4.4415278,2.6089571,5.5510011 4.4448051,2.5756919,5.5510011 4.4415278,2.5424261,5.5510011 4.4160681,2.670424,5.5510011 4.3948631,2.6962631,5.5510011 4.3690238,2.717468,5.5510011 4.3395438,2.7332251,5.5510011 4.3075571,2.742929,5.5510011 4.274292,2.7462051,5.5510011 4.2410259,2.742929,5.5510001 4.2090392,2.7332261,5.5510001
 4.1795592,2.717469,5.5510001 4.1537199,2.6962631,5.5510001 4.132514,2.670424,5.5510001 4.1167569,2.640944,5.5510001 4.1070542,2.6089571,5.5510001 4.1037779,2.5756919,5.5510001 4.1070542,2.5424261,5.5510001 4.1167569,2.5104389,5.5510001 4.132514,2.4809599,5.5510001 4.1537199,2.455121,5.5510001 4.1795592,2.4339149,5.5510001 4.2090378,2.4181581,5.5510001 4.241025,2.4084549,5.5510001
@@ -333,7 +333,7 @@
 			<Button Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="4" Grid.RowSpan="1" Content="Quit" BorderBrush="#FF979797" Background="#FFA80404" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
 		</Grid>
         <!--Section for debugging tools-->
-		<Canvas x:Name="debugging">
+		<Canvas x:Name="debugging" Visibility="Hidden">
 			<TextBlock x:Name="HeadPosition" Grid.Row="0"  HorizontalAlignment="Left" Padding="25px 0px" TextWrapping="Wrap" Text="HeadPosition:" VerticalAlignment="Center" Canvas.Left="10" Canvas.Top="76"/>
 			<TextBlock x:Name="RightHandPosition" Grid.Row="0"  HorizontalAlignment="Right" Padding="25px 0px" TextWrapping="Wrap" Text="RightHandPosition:" VerticalAlignment="Center" Canvas.Top="55"/>
 			<TextBlock x:Name="LeftHandPosition" Grid.Row="0"  HorizontalAlignment="Right" Padding="25px 0px" TextWrapping="Wrap" Text="LeftHandPosition:" VerticalAlignment="Center" Canvas.Top="92"/>

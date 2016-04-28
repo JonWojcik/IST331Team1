@@ -171,9 +171,18 @@ namespace XboxController
 
         void triggerPull()
         {
-            MessageBox.Show(targetName);
-            //get position of shot (x, and y)
-            //distance (y) doesn't matter, find anything in 3d space that is within the x and y coordinates and then mark it as hit
+            if (targetName == "Center")
+            {
+                ArrowCenterModel.Material = hitColor;  
+            }
+            if (targetName == "Right")
+            {
+                ArrowRightModel.Material = hitColor;
+            }
+            if (targetName == "Left")
+            {
+                ArrowLeftModel.Material = hitColor;  
+            }
         }
 
 
