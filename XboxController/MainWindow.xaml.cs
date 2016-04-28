@@ -34,6 +34,7 @@ namespace XboxController
         public bool isPaused = false;
         public bool isCalibrated = false;
         public string targetName;
+        Material hitColor = new DiffuseMaterial(new SolidColorBrush(Colors.Blue));
 
         public MainWindow()
         {
@@ -115,7 +116,7 @@ namespace XboxController
                             {
                                 targetName = "Right";
                                 handDirection.Text = "Right";
-                                
+                                ArrowRightModel.Material = hitColor;         
                             }
                             
                         }
