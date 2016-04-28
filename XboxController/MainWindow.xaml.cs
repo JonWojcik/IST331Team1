@@ -18,6 +18,8 @@ using System.Windows.Threading;
 using Microsoft.Kinect;
 using System.IO;
 using System.Windows.Media.Media3D;
+using HelixToolkit.Wpf;
+using HelixToolkit;
 
 namespace XboxController
 {
@@ -41,6 +43,7 @@ namespace XboxController
             _timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(0.5) };
             _timer.Tick += _timer_Tick;
             _timer.Start();
+
         }
         private void Window_Loaded_1(object sender, RoutedEventArgs e)
         {
@@ -95,9 +98,14 @@ namespace XboxController
                             LeftHandPosition.Text = "LeftHandPosition: x" + jointCollection[JointType.HandLeft].Position.X + "y" + jointCollection[JointType.HandLeft].Position.Y;
                             RightHandPosition.Text = "RightHandPosition: x" + jointCollection[JointType.HandRight].Position.X + "y" + jointCollection[JointType.HandRight].Position.Y;
                             HeadPosition.Text = "HeadPosition: x" + jointCollection[JointType.Head].Position.X + "y" + jointCollection[JointType.Head].Position.Y;
-                            camMain.Position = new Point3D(jointCollection[JointType.Head].Position.X * -10, 10, jointCollection[JointType.Head].Position.Y * 20);
+                            gameView.Position = new Point3D(jointCollection[JointType.Head].Position.X * -10, 10, jointCollection[JointType.Head].Position.Y * 20);
 
                             handsAboveHead(user);
+                            if (0 < jointCollection[JointType.HandRight].X > 1 && 2 < jointCollection[JointType.HandRight].Y < 4)
+                            {
+                                
+
+                            }
                         }
                     }
                 }
@@ -108,6 +116,7 @@ namespace XboxController
         {
             StartScreen.Visibility = Visibility.Hidden;
         }
+        
         //Closing Sensor_SkeletonFrameReady method
 
         //Gesture for pausing game if hands are above head
