@@ -101,16 +101,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="photos-2015-09-18-fst_587tqppbzwx.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="TargetScene.mtl" />
-    <None Include="TargetSceneSimple.mtl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -119,10 +114,6 @@
     <Content Include="DLL\HelixToolkit.dll" />
     <Content Include="DLL\HelixToolkit.Wpf.dll" />
     <Content Include="DLL\Microsoft.Xna.Framework.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="TargetScene.obj" />
-    <Resource Include="TargetSceneSimple.obj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

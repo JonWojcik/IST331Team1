@@ -18,8 +18,7 @@ using System.Windows.Threading;
 using Microsoft.Kinect;
 using System.IO;
 using System.Windows.Media.Media3D;
-using HelixToolkit.Wpf;
-using HelixToolkit;
+
 
 namespace XboxController
 {
@@ -34,8 +33,7 @@ namespace XboxController
         KinectSensor _sensor;
         public bool isPaused = false;
         public bool isCalibrated = false;
-        public double windowHeight;
-        public double windowWidth;
+        public string targetName;
 
         public MainWindow()
         {
@@ -48,8 +46,7 @@ namespace XboxController
         private void Window_Loaded_1(object sender, RoutedEventArgs e)
         {
 
-            windowHeight = viewport3D1.Height;
-            windowWidth = viewport3D1.Width;
+
             _sensor = KinectSensor.KinectSensors.Where(
                s => s.Status == KinectStatus.Connected).FirstOrDefault();
             foreach (KinectSensor sensor in KinectSensor.KinectSensors)
@@ -98,14 +95,29 @@ namespace XboxController
                             LeftHandPosition.Text = "LeftHandPosition: x" + jointCollection[JointType.HandLeft].Position.X + "y" + jointCollection[JointType.HandLeft].Position.Y;
                             RightHandPosition.Text = "RightHandPosition: x" + jointCollection[JointType.HandRight].Position.X + "y" + jointCollection[JointType.HandRight].Position.Y;
                             HeadPosition.Text = "HeadPosition: x" + jointCollection[JointType.Head].Position.X + "y" + jointCollection[JointType.Head].Position.Y;
-                            gameView.Position = new Point3D(jointCollection[JointType.Head].Position.X * -10, 10, jointCollection[JointType.Head].Position.Y * 20);
-
+                            gameView.Position = new Point3D(jointCollection[JointType.Head].Position.X * 5, jointCollection[JointType.Head].Position.Y * 15, 12.2);
+                          
                             handsAboveHead(user);
-                            if (0 < jointCollection[JointType.HandRight].X > 1 && 2 < jointCollection[JointType.HandRight].Y < 4)
+                            
+                            // Determines direction of right hand
+                            if (jointCollection[JointType.HandRight].Position.X > -0.13 && jointCollection[JointType.HandLeft].Position.X < 0.2)
                             {
+                                targetName = "Center";
+                                handDirection.Text = "center";
                                 
-
                             }
+                            if (jointCollection[JointType.HandRight].Position.X < -0.13)
+                            {
+                                targetName = "Left";
+                                handDirection.Text = "Left";
+                            }
+                            if (jointCollection[JointType.HandRight].Position.X > 0.2)
+                            {
+                                targetName = "Right";
+                                handDirection.Text = "Right";
+                                
+                            }
+                            
                         }
                     }
                 }
@@ -116,7 +128,6 @@ namespace XboxController
         {
             StartScreen.Visibility = Visibility.Hidden;
         }
-        
         //Closing Sensor_SkeletonFrameReady method
 
         //Gesture for pausing game if hands are above head
@@ -159,7 +170,7 @@ namespace XboxController
 
         void triggerPull()
         {
-            MessageBox.Show("trigger");
+            MessageBox.Show(targetName);
             //get position of shot (x, and y)
             //distance (y) doesn't matter, find anything in 3d space that is within the x and y coordinates and then mark it as hit
         }
