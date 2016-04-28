@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="XboxController.MainWindow"
         Title="MainWindow" Height="750" Width="1225" ResizeMode="NoResize" WindowState="Maximized" Loaded="Window_Loaded_1">
-	<Grid x:Name="masterGrid" Background="#FF67B1FB">
+    <Grid x:Name="masterGrid" Background="#FF67B1FB">
         <!-- 3D Game Section-->
         <Viewport3D ClipToBounds="True">
             <Viewport3D.Camera>
@@ -273,96 +273,103 @@
         </Viewport3D>
 
         <!-- HUD FOR MAIN GAME-->
-		<Grid x:Name="Hud" Opacity="0.9">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="*" />
-				<RowDefinition Height="2*" />
-				<RowDefinition Height="2*" />
-				<RowDefinition Height="6*" />
-			</Grid.RowDefinitions>
-			<TextBlock x:Name="Score" Grid.Row="0" Grid.RowSpan="1" HorizontalAlignment="Left" Padding="25px 0px" TextWrapping="Wrap" Text="Score:" VerticalAlignment="Center"/>
-			<TextBlock x:Name="Level" Grid.Row="0" Grid.RowSpan="1" HorizontalAlignment="Right" Padding="25px 0px" TextWrapping="Wrap" Text="Level:" VerticalAlignment="Center"/>
-		</Grid>
+        <Grid x:Name="Hud" Opacity="0.9" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="6*" />
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="Score" Grid.Row="0" Grid.RowSpan="1" HorizontalAlignment="Left" Padding="25px 0px" TextWrapping="Wrap" Text="Score:" VerticalAlignment="Center" FontSize="44" Foreground="White"/>
+            <TextBlock x:Name="Level" Grid.Row="0" Grid.RowSpan="1" HorizontalAlignment="Right" Padding="25px 0px" TextWrapping="Wrap" Text="Level:" VerticalAlignment="Center" FontSize="44" Foreground="White"/>
+            <TextBlock x:Name="gameText" Grid.Row="2" Grid.RowSpan="1" HorizontalAlignment="Center" Padding="25px 0px" TextWrapping="Wrap" Text="Begin" VerticalAlignment="Center" FontSize="144" Foreground="White"/>
+        </Grid>
         <!-- PAUSE MENU -->
-		<Grid x:Name="PauseMenu" Opacity="0.75" Background="Black" Visibility="Hidden">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="*"/>
-				<RowDefinition Height="*"/>
-				<RowDefinition Height="*"/>
-				<RowDefinition Height="*"/>
-				<RowDefinition Height="*"/>
-				<RowDefinition Height="*"/>
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="100px"/>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="100px"/>
-			</Grid.ColumnDefinitions>
-			<TextBlock Text="Pause Menu" Foreground="White" FontSize="35" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-			<Button x:Name="btnResume" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="1" Grid.RowSpan="1" Content="Resume" BorderBrush="#FF979797" Background="#FF15B215" Foreground="White" FontSize="30" Margin="5px" VerticalContentAlignment="Center" Click="btnResume_Click" />
-			<Button x:Name="btnOptions" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="2" Grid.RowSpan="1" Content="Options" BorderBrush="#FF979797" Background="#FF008AFD" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="btnOptions_Click" />
-			<Button x:Name="btnRestart" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="3" Grid.RowSpan="1" Content="Restart" BorderBrush="#FF979797" Background="#FFDCDC1E" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-			<Button x:Name="btnQuit" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="4" Grid.RowSpan="1" Content="Quit" BorderBrush="#FF979797" Background="#FFFD0000" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-		</Grid>
-		<Grid x:Name="calibrationScreen" Background="Black" Opacity="0.85" Visibility="Hidden">
-			<TextBlock Text="Please point at the Green dot and press the trigger button" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" TextWrapping="Wrap" Foreground="White"/>
-			<Ellipse x:Name="topLeft" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-25 -25" Height="50" Width="50" Fill="Green"/>
-			<Ellipse x:Name="bottomLeft" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="-25 -25" Height="50" Width="50" Fill="Gray"/>
-			<Ellipse x:Name="bottomRight" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="-25 -25" Height="50" Width="50" Fill="Gray"/>
-			<Ellipse x:Name="topRight" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="-25 -25" Height="50" Width="50" Fill="Gray"/>
-		</Grid>
+        <Grid x:Name="PauseMenu" Opacity="0.75" Background="Black" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100px"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100px"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Pause Menu" Foreground="White" FontSize="35" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Button x:Name="btnResume" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="1" Grid.RowSpan="1" Content="Resume" BorderBrush="#FF979797" Background="#FF15B215" Foreground="White" FontSize="30" Margin="5px" VerticalContentAlignment="Center" Click="btnResume_Click" />
+            <Button x:Name="btnOptions" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="2" Grid.RowSpan="1" Content="Options" BorderBrush="#FF979797" Background="#FF008AFD" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="btnOptions_Click" />
+            <Button x:Name="btnRestart" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="3" Grid.RowSpan="1" Content="Restart" BorderBrush="#FF979797" Background="#FFDCDC1E" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            <Button x:Name="btnQuit" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="4" Grid.RowSpan="1" Content="Quit" BorderBrush="#FF979797" Background="#FFFD0000" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        </Grid>
+        <Grid x:Name="calibrationScreen" Background="Black" Opacity="0.85" Visibility="Hidden">
+            <TextBlock Text="Please point at the Green dot and press the trigger button" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50" TextWrapping="Wrap" Foreground="White"/>
+            <Ellipse x:Name="topLeft" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-25 -25" Height="50" Width="50" Fill="Green"/>
+            <Ellipse x:Name="bottomLeft" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="-25 -25" Height="50" Width="50" Fill="Gray"/>
+            <Ellipse x:Name="bottomRight" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="-25 -25" Height="50" Width="50" Fill="Gray"/>
+            <Ellipse x:Name="topRight" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="-25 -25" Height="50" Width="50" Fill="Gray"/>
+        </Grid>
         <!-- MAIN STARTUP SCREEN-->
-		<Grid x:Name="StartScreen" Background="LightSkyBlue" Visibility="Hidden">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="*"/>
-				<RowDefinition Height="*"/>
-				<RowDefinition Height="*"/>
-				<RowDefinition Height="*"/>
-				<RowDefinition Height="*"/>
-				<RowDefinition Height="*"/>
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="100px"/>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="100px"/>
-			</Grid.ColumnDefinitions>
-			<TextBlock Text="Game Title" Foreground="White" FontSize="35" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-			<Button x:Name="StartBtn" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="1" Grid.RowSpan="1" Content="Start" BorderBrush="#FF979797" Background="#FF04DC18" Foreground="White" FontSize="30" Margin="5px" VerticalContentAlignment="Center" />
-			<Button Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="2" Grid.RowSpan="1" Content="Settings" BorderBrush="#FF979797" Background="#FFCFA900" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-			<Button Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="3" Grid.RowSpan="1" Content="High Scores" BorderBrush="#FF979797" Background="#FF008AFD" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-			<Button Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="4" Grid.RowSpan="1" Content="Quit" BorderBrush="#FF979797" Background="#FFA80404" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-		</Grid>
+        <Grid x:Name="StartScreen" Visibility="Visible">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#7FFFFAFA" Offset="0"/>
+                    <GradientStop Color="#FF003AFF" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100px"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100px"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Target Reflex" Foreground="White" FontSize="65" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Button x:Name="StartBtn" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="1" Grid.RowSpan="1" Content="Start" BorderBrush="#FF979797" Background="#FF04DC18" Foreground="White" FontSize="40" Margin="5px" VerticalContentAlignment="Center" Click="startBtn" />
+            <Button Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="2" Grid.RowSpan="1" Content="Settings" BorderBrush="#FF979797" Background="#FFCFA900" Foreground="White" FontSize="40" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            <Button Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="3" Grid.RowSpan="1" Content="High Scores" BorderBrush="#FF979797" Background="#FF008AFD" Foreground="White" FontSize="40" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            <Button Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="4" Grid.RowSpan="1" Content="Quit" BorderBrush="#FF979797" Background="#FFA80404" Foreground="White" FontSize="40" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="mainQuitBtn" />
+        </Grid>
         <!--Section for debugging tools-->
-		<Canvas x:Name="debugging" Visibility="Hidden">
-			<TextBlock x:Name="HeadPosition" Grid.Row="0"  HorizontalAlignment="Left" Padding="25px 0px" TextWrapping="Wrap" Text="HeadPosition:" VerticalAlignment="Center" Canvas.Left="10" Canvas.Top="76"/>
-			<TextBlock x:Name="RightHandPosition" Grid.Row="0"  HorizontalAlignment="Right" Padding="25px 0px" TextWrapping="Wrap" Text="RightHandPosition:" VerticalAlignment="Center" Canvas.Top="55"/>
-			<TextBlock x:Name="LeftHandPosition" Grid.Row="0"  HorizontalAlignment="Right" Padding="25px 0px" TextWrapping="Wrap" Text="LeftHandPosition:" VerticalAlignment="Center" Canvas.Top="92"/>
+        <Canvas x:Name="debugging" Visibility="Hidden">
+            <TextBlock x:Name="HeadPosition" Grid.Row="0"  HorizontalAlignment="Left" Padding="25px 0px" TextWrapping="Wrap" Text="HeadPosition:" VerticalAlignment="Center" Canvas.Left="10" Canvas.Top="76"/>
+            <TextBlock x:Name="RightHandPosition" Grid.Row="0"  HorizontalAlignment="Right" Padding="25px 0px" TextWrapping="Wrap" Text="RightHandPosition:" VerticalAlignment="Center" Canvas.Top="55"/>
+            <TextBlock x:Name="LeftHandPosition" Grid.Row="0"  HorizontalAlignment="Right" Padding="25px 0px" TextWrapping="Wrap" Text="LeftHandPosition:" VerticalAlignment="Center" Canvas.Top="92"/>
             <TextBlock x:Name="handDirection" Grid.Row="0"  HorizontalAlignment="Right" Padding="25px 0px" TextWrapping="Wrap" Text="Direction" VerticalAlignment="Center" Canvas.Top="113"/>
-			<Ellipse x:Name="ellipiseHandRight" Fill="Red" HorizontalAlignment="Left" Height="50" Margin="387,269,0,-47" Stroke="Black" VerticalAlignment="Top" Width="50" Opacity="0.75"/>
-			<Ellipse x:Name="ellipiseHandLeft" Fill="Blue" HorizontalAlignment="Left" Height="50"  Stroke="Black" VerticalAlignment="Top" Width="50" Opacity="0.75"/>
+            <TextBlock x:Name="GameFrame" Grid.Row="0"  HorizontalAlignment="Right" Padding="25px 0px" TextWrapping="Wrap" Text="Frames:" VerticalAlignment="Center" Canvas.Top="151"/>
+            <TextBlock x:Name="RandomSeconds" Grid.Row="0"  HorizontalAlignment="Right" Padding="25px 0px" TextWrapping="Wrap" Text="Seconds:" VerticalAlignment="Center" Canvas.Top="202"/>
 
-		</Canvas>
+        </Canvas>
         <!-- OPTIONS MENU -->
-		<Grid x:Name="OptionsMenu" Opacity="0.75" Background="Black" Visibility="Hidden">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="*"/>
-				<RowDefinition Height="*"/>
-				<RowDefinition Height="*"/>
-				<RowDefinition Height="*"/>
-				<RowDefinition Height="*"/>
-				<RowDefinition Height="*"/>
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="100px"/>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="100px"/>
-			</Grid.ColumnDefinitions>
-			<TextBlock Text="Options Menu" Foreground="White" FontSize="35" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-			<Button x:Name="btnStartMenu" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="2" Grid.RowSpan="1" Content="Start Menu" BorderBrush="#FF979797" Background="#FF1EDC27" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-			<Button x:Name="btnBack" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="4" Grid.RowSpan="1" Content="Back" BorderBrush="#FF979797" Background="#FFFD0000" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="btnBack_Click" />
-		</Grid>
+        <Grid x:Name="OptionsMenu" Opacity="0.75" Background="Black" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100px"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100px"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Options Menu" Foreground="White" FontSize="35" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Button x:Name="btnStartMenu" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="2" Grid.RowSpan="1" Content="Start Menu" BorderBrush="#FF979797" Background="#FF1EDC27" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            <Button x:Name="btnBack" Grid.Column="1" Grid.ColumnSpan="1"  Grid.Row="4" Grid.RowSpan="1" Content="Back" BorderBrush="#FF979797" Background="#FFFD0000" Foreground="White" FontSize="30" Margin="5px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="btnBack_Click" />
+        </Grid>
 
-		
 
-	</Grid>
+
+    </Grid>
 </Window>

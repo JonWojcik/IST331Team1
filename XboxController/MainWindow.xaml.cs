@@ -30,11 +30,25 @@ namespace XboxController
     {
 
         DispatcherTimer _timer = new DispatcherTimer();
+        DispatcherTimer game_time = new DispatcherTimer();
+
         KinectSensor _sensor;
         public bool isPaused = false;
-        public bool isCalibrated = false;
         public string targetName;
+        int xcam = -2;
+        int ycam = 2;
+        int zcam = 4;
+        int game_frames = 0;
+        int game_score;
+        int game_level;
+        int level_points;
+        int interval = 160;
+        int looped = 0;
+
         Material hitColor = new DiffuseMaterial(new SolidColorBrush(Colors.Blue));
+        Material missColor = new DiffuseMaterial(new SolidColorBrush(Colors.Red));
+        Material shootColor = new DiffuseMaterial(new SolidColorBrush(Colors.Green));
+        Material noColor = new DiffuseMaterial(new SolidColorBrush(Colors.Gray));
 
         public MainWindow()
         {
@@ -42,6 +56,9 @@ namespace XboxController
             _timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(0.5) };
             _timer.Tick += _timer_Tick;
             _timer.Start();
+            game_time = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(1) };
+            game_time.Tick += game_time_Tick;
+            
 
         }
         private void Window_Loaded_1(object sender, RoutedEventArgs e)
@@ -68,7 +85,11 @@ namespace XboxController
                     }
                 }
             }
-
+            if (StartScreen.Visibility == Visibility.Visible)
+            {
+                gameView.Position = new Point3D(xcam, ycam, zcam);
+                gameView.LookDirection = new Vector3D(4, 1, -22);
+            }
         }
 
         //Skeleton Tracking
@@ -97,15 +118,15 @@ namespace XboxController
                             RightHandPosition.Text = "RightHandPosition: x" + jointCollection[JointType.HandRight].Position.X + "y" + jointCollection[JointType.HandRight].Position.Y;
                             HeadPosition.Text = "HeadPosition: x" + jointCollection[JointType.Head].Position.X + "y" + jointCollection[JointType.Head].Position.Y;
                             gameView.Position = new Point3D(jointCollection[JointType.Head].Position.X * 5, jointCollection[JointType.Head].Position.Y * 15, 12.2);
-                          
+
                             handsAboveHead(user);
-                            
+
                             // Determines direction of right hand
                             if (jointCollection[JointType.HandRight].Position.X > -0.13 && jointCollection[JointType.HandLeft].Position.X < 0.2)
                             {
                                 targetName = "Center";
                                 handDirection.Text = "center";
-                                
+
                             }
                             if (jointCollection[JointType.HandRight].Position.X < -0.13)
                             {
@@ -116,9 +137,9 @@ namespace XboxController
                             {
                                 targetName = "Right";
                                 handDirection.Text = "Right";
-                                ArrowRightModel.Material = hitColor;         
+                                ArrowRightModel.Material = hitColor;
                             }
-                            
+
                         }
                     }
                 }
@@ -128,6 +149,11 @@ namespace XboxController
         public void startGame()
         {
             StartScreen.Visibility = Visibility.Hidden;
+            Hud.Visibility = Visibility.Visible;
+            game_score = 0;
+            game_level = 1;
+            level_points = 400;
+            game_time.Start();
         }
         //Closing Sensor_SkeletonFrameReady method
 
@@ -149,7 +175,79 @@ namespace XboxController
         {
             DisplayControllerInformation();
             MenuControls();
+
         }
+        void game_time_Tick(object sender, EventArgs e)
+        {
+            game_frames++;
+            looped++;
+            int seconds;
+            DateTime random = DateTime.Now;
+            int random_number = random.Millisecond/100;
+            seconds = game_frames / 80;
+            GameFrame.Text = "Frames:" + game_frames;
+            if (game_frames < 300)
+            {
+                ArrowCenterModel.Material = noColor;
+                ArrowLeftModel.Material = noColor;
+                ArrowRightModel.Material = noColor;
+            }
+            switch(seconds)
+            {
+                case 0:
+                    gameText.Text = "3";
+                    break;
+                case 1:
+                    gameText.Text = "2";
+                    break;
+                case 2:
+                    gameText.Text = "1";
+                    break;
+                case 3:
+                    gameText.Text = "GO!";
+                    break;
+                case 4:
+                    gameText.Text = "";
+                    break;
+            }
+            if (looped < interval)
+            {
+                RandomSeconds.Text = "Seconds: " + random_number;
+                
+                if (looped == (interval - 1))
+                {
+                    looped = 0;
+                    random_number = random.Millisecond / 100;
+                    if (random_number == 1 || random_number == 3 || random_number == 5 || random_number == 8)
+                    {
+                        ArrowLeftModel.Material = shootColor;
+                        ArrowCenterModel.Material = noColor;
+                        ArrowRightModel.Material = noColor;
+                    }
+                    if (random_number == 2 || random_number == 4 || random_number == 6 || random_number == 9)
+                    {
+                        ArrowCenterModel.Material = shootColor;
+                        ArrowLeftModel.Material = noColor;
+                        ArrowRightModel.Material = noColor;
+                    }
+                    if (random_number == 0 || random_number == 3 || random_number == 5 || random_number == 7)
+                    {
+                        ArrowRightModel.Material = shootColor;
+                        ArrowCenterModel.Material = noColor;
+                        ArrowLeftModel.Material = noColor;
+                    }
+                }
+            }
+            Score.Text = "Score: " + game_score;
+            Level.Text = "Level: " + game_level;
+            if (game_score > level_points)
+            {
+                game_level++;
+                level_points = level_points + level_points;
+                interval = interval - 10;
+            }
+        }
+
 
         void DisplayControllerInformation()
         {
@@ -173,15 +271,28 @@ namespace XboxController
         {
             if (targetName == "Center")
             {
-                ArrowCenterModel.Material = hitColor;  
+                if (ArrowCenterModel.Material == shootColor)
+                {
+                    ArrowCenterModel.Material = hitColor;
+                    game_score = game_score + 50;
+                }
+                
             }
             if (targetName == "Right")
             {
-                ArrowRightModel.Material = hitColor;
+                if (ArrowRightModel.Material == shootColor)
+                {
+                    ArrowRightModel.Material = hitColor;
+                    game_score = game_score + 50;
+                }
             }
             if (targetName == "Left")
             {
-                ArrowLeftModel.Material = hitColor;  
+                if (ArrowLeftModel.Material == shootColor)
+                {
+                    ArrowLeftModel.Material = hitColor;
+                    game_score = game_score + 50;
+                } 
             }
         }
 
@@ -193,9 +304,11 @@ namespace XboxController
             var GPstate = GamePad.GetState(PlayerIndex.One);
             if (PauseMenu.IsVisible)
             {
+                game_time.Stop();
                 if (GPstate.IsButtonDown(Buttons.A))
                 {
                     PauseMenu.Visibility = Visibility.Hidden;
+                    game_time.Start();
                 }
                 else if (GPstate.IsButtonDown(Buttons.X))
                 {
@@ -214,6 +327,7 @@ namespace XboxController
                 {
                     OptionsMenu.Visibility = Visibility.Hidden;
                     PauseMenu.Visibility = Visibility.Hidden;
+                    game_time.Start();
                 }
             }
             if (StartScreen.IsVisible)
@@ -263,19 +377,6 @@ namespace XboxController
             PauseMenu.Visibility = Visibility.Visible;
         }
 
-        public void calibrateTargeting()
-        {
-            calibrationScreen.Visibility = Visibility.Visible;
-            //Math
-            //hand used to aim x and y max and min
-            //average the height and width and then divide by 2 to get the center
-            //get difference between points at x and y measurements
-            //measures of arm movement divided by screen measusurements gets how many meters moved over screen distance
-            //
-
-            isCalibrated = true;
-            calibrationScreen.Visibility = Visibility.Hidden;
-        }
         //Keyboard support
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
@@ -306,6 +407,20 @@ namespace XboxController
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             OptionsMenu.Visibility = Visibility.Hidden;
+        }
+
+        private void startBtn(object sender, RoutedEventArgs e)
+        {
+            startGame();
+        }
+        public void quitGame()
+        {
+            Environment.Exit(1);
+        }
+
+        private void mainQuitBtn(object sender, RoutedEventArgs e)
+        {
+            quitGame();
         }
 
     }
